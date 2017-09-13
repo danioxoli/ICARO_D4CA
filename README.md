@@ -1,4 +1,7 @@
 # ICARO  
+```sh
+ $ work in progres ...
+``` 
 
 The **ICARO** (_**T**raff**I**c and urbanization effe**C**ts on temper**A**ture in the u**R**ban envir**O**nment_ ) Project has started on June 2017 as input of the [D4CA] - [DATA FOR CLIMATE ACTION CHALLENGE]. This challenge is promoted by the [UN GLOBAL PULSE] and aims to _connects researchers around the world with data and tools from leading companies to enable data-driven climate solutions_.
 
@@ -8,7 +11,7 @@ The purpose of the project is to disclose evidence of the direct anthropogenic i
 ### Initial case study
 The preliminary data and analysis frameworks are developed for the city of Milan (Italy)
 
-### Expected oucomes
+### Expected outcomes
 
 
 
@@ -16,4 +19,8 @@ The preliminary data and analysis frameworks are developed for the city of Milan
 [DATA FOR CLIMATE ACTION CHALLENGE]: <http://www.dataforclimateaction.org>
 [UN GLOBAL PULSE]: <http://www.unglobalpulse.org>
 [Free and Open Source Software (FOSS)]: <https://www.fsf.org>
-add something...
+
+```sh
+ $ something more soon...
+``` 
+
