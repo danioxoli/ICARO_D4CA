@@ -9,7 +9,7 @@ The **ICARO** (_Traff**I**c and urbanization effe**C**ts on temper**A**ture in t
 The general purpose of this project is to disclose evidence of the direct anthropogenic influence on urban heating patterns by developing and testing of original data analysis frameworks. These are prototyped to take advantage from the geospatial information available from new and heterogenous data sources, namely: high-resolution open and proprietary Earth Observations (EO), open data catalogues provided by pubblic amministrations, environmental sensors and geo-crowdsourcing. Particular consideration is given to the use of [Free and Open Source Software (FOSS)] as data analysis tools to enhance both replicability as well as further improvement through possible feedbacks and reviews by the scientific community to which full access to the procedure pipelines is guaranted. 
 
 ### Initial case study
-The preliminary data and analysis frameworks are developed for the city of Milan (Italy). Milan is placed in one of the most densly populated European regions, the [Padana Plain], affected by poor wind circulation and an high urbanization favoring the stagnation of mists and pollutants as well as the persistency of an [historically known Urban Heat Island]. Besides these environemtal paculiarities (which nevertheless link Milan with many European cities),   
+The preliminary data and analysis frameworks are developed for the city of Milan (Italy). Milan is placed in one of the most densly populated European regions, the [Padana Plain], affected by poor wind circulation and an high urbanization favoring the stagnation of pollutants as well as the persistency of an [historically known Urban Heat Island]. Besides these environemtal paculiarities (which nevertheless link Milan with many European cities), The Municipality of Milan has recently adoped a valuable [Open Data Policy] 
 
 ### Expected outcomes
 
@@ -21,6 +21,7 @@ The preliminary data and analysis frameworks are developed for the city of Milan
 [Free and Open Source Software (FOSS)]: <https://www.fsf.org>
 [Padana Plain]:<https://en.wikipedia.org/wiki/Po_Valley>
 [historically known Urban Heat Island]: <https://link.springer.com/article/10.1007/BF02511742>
+[Open Data Policy]: <http://dati.comune.milano.it>
 
 ```sh
  $ something more soon...
