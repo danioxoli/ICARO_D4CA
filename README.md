@@ -11,7 +11,7 @@ The ICARO [working team] is composed by researchers, students and professors ope
 ## Executive summary
 
 ### Project Purpose
-The general purpose of this project is to disclose evidence of the direct anthropogenic influence on urban heating patterns by developing and testing of original data analysis frameworks. These are prototyped to take advantage from the [Geospatial  Information] available from new and heterogenous sources, namely: high-resolution open and proprietary Earth Observations (EO), open data catalogues provided by pubblic amministrations, environmental sensors and geo-crowdsourcing. Particular consideration is given to the use of [Free and Open Source Software (FOSS)] as data analysis tools to enhance both replicability as well as further improvement through possible feedbacks and reviews by the scientific community to which full access to the procedure pipelines is guaranted. 
+The general purpose of this project is to disclose evidence of the direct anthropogenic influence on urban heating patterns by developing and testing of original data analysis frameworks. These are prototyped to take advantage from the [Geospatial  Information] available from new and heterogenous sources, namely: high-resolution (both open and proprietary) Earth Observations (EO), open data catalogues provided by pubblic amministrations, environmental sensors and geo-crowdsourcing. Particular consideration is given to the use of [Free and Open Source Software (FOSS)] as data analysis tools to enhance both replicability as well as further improvement through possible feedbacks and reviews by the scientific community to which full access to the procedure pipelines is guaranted. 
 
 ### Case study: Milan (Italy)
 
