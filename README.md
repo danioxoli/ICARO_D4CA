@@ -4,7 +4,7 @@
  $ work in progress ...
 ``` 
 
-The **ICARO** project(_Traff**I**c and urbanization effe**C**ts on temper**A**ture in the u**R**ban envir**O**nment_ )  has started on June 2017 as input of the [D4CA] - [DATA FOR CLIMATE ACTION CHALLENGE]. D4CA challenge is promoted by the [UN GLOBAL PULSE] and aims to _connects researchers around the world with data and tools from leading companies to enable data-driven climate solutions_.
+The **ICARO** project (_Traff**I**c and urbanization effe**C**ts on temper**A**ture in the u**R**ban envir**O**nment_ )  has started on June 2017 as input of the [D4CA] - [DATA FOR CLIMATE ACTION CHALLENGE]. D4CA challenge is promoted by the [UN GLOBAL PULSE] and aims to _connects researchers around the world with data and tools from leading companies to enable data-driven climate solutions_.
 
 ## Executive summary
 
