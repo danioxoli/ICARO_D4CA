@@ -35,7 +35,6 @@ Two main questions have been addressed in parallel, through data analysis, for t
 ### Disclaimer
 
 
-/links
 
 [D4CA]: <https://twitter.com/search?q=%23D4CA&src=typd>
 [DATA FOR CLIMATE ACTION CHALLENGE]: <http://www.dataforclimateaction.org>
