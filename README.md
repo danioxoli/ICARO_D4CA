@@ -17,7 +17,7 @@ For the aforementioned reasons, Milan tourn out to be a good playgroung for impl
 
 The main goal of this phase is to deliver possible solutions to empower the study of urban heating issues, which are typically linked with anthropogenic factors (e.g. Urban Heat Island - UHI), with this novel variety of data. This include investigations of actual data availability, harmonization requirements and exploration practices to asses its potential benefit  in improving the understanding / mitigation / menagement, at a local scale, of urban climate issues. 
 
-The final  objective of the authors is to converge these outcomes within the [World Urban Database and Access Portal Tools] (WUDAPT) project, which is considired here as a guidline for each project activity.
+The final  objective of the authors is to converge the most meaningful outcomes within the [World Urban Database and Access Portal Tools] (WUDAPT) project, which is considired here as a guidline for each project activity.
 
 #### Experiments outline
 The principal branches of the preliminary work on milan includes
