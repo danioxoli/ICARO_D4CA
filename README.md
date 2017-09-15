@@ -6,10 +6,12 @@
 
 The **ICARO** (_Traff**I**c and urbanization effe**C**ts on temper**A**ture in the u**R**ban envir**O**nment_ ) Project has started on June 2017 as input of the [D4CA] - [DATA FOR CLIMATE ACTION CHALLENGE]. D4CA challenge is promoted by the [UN GLOBAL PULSE] and aims to _connects researchers around the world with data and tools from leading companies to enable data-driven climate solutions_.
 
+## Executive summary
+
 ### Project Purpose
 The general purpose of this project is to disclose evidence of the direct anthropogenic influence on urban heating patterns by developing and testing of original data analysis frameworks. These are prototyped to take advantage from the [Geospatial  Information] available from new and heterogenous sources, namely: high-resolution open and proprietary Earth Observations (EO), open data catalogues provided by pubblic amministrations, environmental sensors and geo-crowdsourcing. Particular consideration is given to the use of [Free and Open Source Software (FOSS)] as data analysis tools to enhance both replicability as well as further improvement through possible feedbacks and reviews by the scientific community to which full access to the procedure pipelines is guaranted. 
 
-### Initial case study
+### Case study
 
 #### Introduction
 The preliminary data and analysis frameworks are developed for the city of Milan (Italy). Milan is placed in one of the most densly populated European regions, the [Padana Plain], affected by poor wind circulation and high urbanization favoring the stagnation of pollutants as well as the persistency of an [historically known Urban Heat Island]. Besides these environemtal paculiarities (which nevertheless link Milan with many European cities), The Municipality of Milan has recently embrached a valuable [Open Data Policy] enabling the possibilities for both citienzens as well as researchers to explore through data a number of urban features and dynamics not easily accessible years behind. This information coupled with other global dataset, available as Open Data as well or kindly provided by [private companies] in the context of the D4CA 
@@ -20,10 +22,13 @@ The main goal of this phase is to deliver possible solutions to empower the stud
 The final  objective of the authors is to converge the most meaningful outcomes within the [World Urban Database and Access Portal Tools] (WUDAPT) project, which is considired here as a guidline for each project activity.
 
 #### Experiments outline
-The principal branches of the preliminary work on milan includes
+Two main questions have been addressed through data analysis for the study of of urban heating issues in the city of Milan, namely: a) 
 
+#### Data
 
-### Expected outcomes
+#### Expected outcomes
+
+### Acknowledgments
 
 
 
