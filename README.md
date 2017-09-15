@@ -22,13 +22,15 @@ The main goal of this phase is to deliver possible solutions to empower the stud
 The final  objective of the authors is to converge the most meaningful outcomes within the [World Urban Database and Access Portal Tools] (WUDAPT) project, which is considired here as a guidline for each project activity.
 
 #### Experiments outline
-Two main questions have been addressed through data analysis for the study of of urban heating issues in the city of Milan, namely: a) 
+Two main questions have been addressed in parallel, through data analysis, for the study of urban heating issues in the city of Milan. These are: a) 
 
 #### Data
 
 #### Expected outcomes
 
 ### Acknowledgments
+
+### Disclaimer
 
 
 
