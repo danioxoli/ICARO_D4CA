@@ -6,6 +6,8 @@
 
 The **ICARO** project (_Traff**I**c and urbanization effe**C**ts on temper**A**ture in the u**R**ban envir**O**nment_ )  has started on June 2017 as input of the [D4CA] - [DATA FOR CLIMATE ACTION CHALLENGE]. D4CA challenge is promoted by the [UN GLOBAL PULSE] with the aim of _connecting researchers around the world with data and tools from leading companies to enable data-driven climate solutions_.
 
+The ICARO [working team] is composed by researchers, students and professors operating in the field of [Geomatics], [Remote Sensing] and [GIS] at [Politencnico di Milano]. 
+
 ## Executive summary
 
 ### Project Purpose
@@ -33,6 +35,7 @@ Two main questions have been addressed in parallel, through data analysis, for t
 ### Disclaimer
 
 
+/links
 
 [D4CA]: <https://twitter.com/search?q=%23D4CA&src=typd>
 [DATA FOR CLIMATE ACTION CHALLENGE]: <http://www.dataforclimateaction.org>
