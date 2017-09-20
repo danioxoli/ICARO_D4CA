@@ -12,7 +12,7 @@ Created on Wed Aug 23 17:00:26 2017
 """
 ###############################################################################
 # To automatically generate ToA and DOS and merge tile related to a specific area or time period
-# (e.g. months of a year) you need to organize a specific folder tree like this:
+# (e.g. months of a year) you need to organize Planet imagery files in folder tree like this:
 #  
 #                       (Root Folder) 
 #                           |
