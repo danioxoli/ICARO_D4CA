@@ -25,6 +25,8 @@ Created on Wed Aug 23 17:00:26 2017
 #  *3 <tilename>_AnalyticMS.tif              (https://www.planet.com/explorer) - mandatory file are 2 and 3
 #  *4 <tilename>_metadata.json
 #
+# note: the tile name is is composed of the following elements: 
+# <acquisition date>_<acquisition time>_<satellite_id>_<productLevel><bandProduct>.<extension>
 ###############################################################################
 '''
 import dependncies and set the working paths
