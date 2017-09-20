@@ -25,7 +25,6 @@ Created on Wed Aug 23 17:00:26 2017
 #
 ###############################################################################
 
-
 import xml.etree.ElementTree as ET
 import os
 from osgeo import gdal 
@@ -33,9 +32,10 @@ import subprocess
 import shutil
 import glob
 
-path = "<root folder path>" #path of planet image root folder
+path = "<root folder path>" #path of planet imagery root folder as explained above
 gdal_merge_path="path to gdal_merge.py" #-this Python script can be download here: https://svn.osgeo.org/gdal/trunk/gdal/swig/python/scripts/gdal_merge.py 
 
+###############################################################################
 '''
 # A * From Digital Numbers to Top of Atmosphere (ToA) Reflectance:
 '''
@@ -70,16 +70,13 @@ for root, dirs, files in os.walk(path):
                         d_temp[name.split('_metadata')[0]]['rc_b'+band] = rf
                         
 #           update final dictionary
-            d.update(d_temp)
-            
-            
-            # python gdal
-            # print name.split('_metadata')[0]
+            d.update(d_temp)           
             
             os.mkdir("/tmp/%s"%name.split('_metadata')[0]) # create temporary folder          
             tmpfolderName = "/tmp/%s"%name.split('_metadata')[0]
             print tmpfolderName
             
+            # do bandwise ToA Reflectance correction
             
             ds = gdal.Open(root+ "/" + name.split('_metadata')[0]+'.tif')
             for b in range(ds.RasterCount+1)[1::]:
@@ -111,6 +108,7 @@ for root, dirs, files in os.walk(path):
             subprocess.call(merge_command_toa) # call gdal_merge.py command and save output in the input folder
             shutil.rmtree(tmpfolderName) # remove temporary folder
 
+###############################################################################
 '''
 # B * Merge mouthly tiles:
 '''
@@ -132,6 +130,7 @@ for item in os.listdir(path):
     subprocess.call(merge_command_merge)
     print ("merged: "+ item)
 
+###############################################################################    
 '''
 # C * Dark Object Subtraction (DOS):
 '''
@@ -181,6 +180,11 @@ for item in os.listdir(path):
 
         subprocess.call(merge_command_dos) # call gdal_merge.py command and save output in the input folder
         shutil.rmtree(tmpfolderName) # remove temporary folder
+
+###############################################################################
+
+# Now you are ready to start classification!
+# Running this code may take time depending on your hardware equipment
 
 
 
