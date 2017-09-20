@@ -24,6 +24,9 @@ Created on Wed Aug 23 17:00:26 2017
 #  *4 <tilename>_metadata.json
 #
 ###############################################################################
+'''
+import dependncies and set the working paths
+'''
 
 import xml.etree.ElementTree as ET
 import os
@@ -32,8 +35,9 @@ import subprocess
 import shutil
 import glob
 
-path = "<root folder path>" #path of planet imagery root folder as explained above
-gdal_merge_path="path to gdal_merge.py" #-this Python script can be download here: https://svn.osgeo.org/gdal/trunk/gdal/swig/python/scripts/gdal_merge.py 
+path = "<root folder path>" #path of Planet imagery root folder as explained above
+gdal_merge_path="path to gdal_merge.py" # this Python script can be download here: 
+                                        # https://svn.osgeo.org/gdal/trunk/gdal/swig/python/scripts/gdal_merge.py 
 
 ###############################################################################
 '''
@@ -76,8 +80,7 @@ for root, dirs, files in os.walk(path):
             tmpfolderName = "/tmp/%s"%name.split('_metadata')[0]
             print tmpfolderName
             
-            # do bandwise ToA Reflectance correction
-            
+            # do bandwise ToA Reflectance correction           
             ds = gdal.Open(root+ "/" + name.split('_metadata')[0]+'.tif')
             for b in range(ds.RasterCount+1)[1::]:
                 raster_band = ds.GetRasterBand(b)
@@ -97,8 +100,7 @@ for root, dirs, files in os.walk(path):
                 outband=None
             ds = None
              
-            # Merge single bands to a multiband image  
-                 
+            # Merge single bands to a multiband image                  
             merge_command_1 = ["python", "%s/gdal_merge.py"%gdal_merge_path,"-separate", "-o", "%s_TOA.tiff"%(root+ "/" + name.split('_metadata')[0])]
             merge_command_2 = sorted(glob.glob(tmpfolderName+"/*.tiff"))  # get the files to merge in temporary folder
              
@@ -114,14 +116,12 @@ for root, dirs, files in os.walk(path):
 '''
 
 #loop on root folder, months folder and months folder files (_TOA.tiff)
-
 for item in os.listdir(path):
     print item
     l = []
     for root, dirs, files in os.walk(path+'/'+item):  
         for name in files:
-            if name.endswith(("_TOA.tiff")):
-                #print (name)            
+            if name.endswith(("_TOA.tiff")):        
                 l.append(root +'/'+ name)
 
     merge_command_3 = ["python", gdal_merge_path + "/gdal_merge.py","-n", "0.0","-a_nodata", "0.0", "-o", path+item+"_M.tiff"] 
@@ -134,8 +134,8 @@ for item in os.listdir(path):
 '''
 # C * Dark Object Subtraction (DOS):
 '''
-#loop on root folder files (_M.tiff)
 
+#loop on root folder files (_M.tiff)
 for item in os.listdir(path):
     if item.endswith(("_M.tiff")):
         os.mkdir("/tmp/%s"%item.split('_M.tiff')[0]) # create temporary folder          
@@ -146,7 +146,6 @@ for item in os.listdir(path):
         print (path+'/%s'%item + ' this is the file to open')
     
         # do bandwise subtraction of min(band) to any _M.tiff images
-
         for b in range(ds.RasterCount+1)[1::]:
             
             raster_band = ds.GetRasterBand(b)
@@ -170,8 +169,7 @@ for item in os.listdir(path):
             outband=None
         ds = None
              
-        # Merge single bands to a multiband image  
-                 
+        # Merge single bands to a multiband image       
         merge_command_5 = ["python", "%s/gdal_merge.py"%gdal_merge_path, "-separate","-o", "%s/%s_DOS.tiff"%(path,item.split('_M.tiff')[0])]
         merge_command_6 = sorted(glob.glob(tmpfolderName+"/*.tiff")) # get the files to merge in temporary folder
              
@@ -182,9 +180,9 @@ for item in os.listdir(path):
         shutil.rmtree(tmpfolderName) # remove temporary folder
 
 ###############################################################################
-
-# Now you are ready to start classification!
-# Running this code may take time depending on your hardware equipment
-
+'''
+ Now you are ready to start classification!
+ Running this code may take time depending on your hardware equipment
+'''
 
 
