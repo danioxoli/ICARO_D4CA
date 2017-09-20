@@ -134,18 +134,18 @@ for item in os.listdir(path):
 '''
 # C * Dark Object Subtraction (DOS):
 '''
+#loop on root folder files (_M.tiff)
 
 for item in os.listdir(path):
     if item.endswith(("_M.tiff")):
         os.mkdir("/tmp/%s"%item.split('_M.tiff')[0]) # create temporary folder          
         tmpfolderName = "/tmp/%s"%item.split('_M.tiff')[0]
-        print tmpfolderName            
         
         ds = gdal.Open(path+'/%s'%item)
         
-        print (path+'%s'%item + ' this is the file to open')
+        print (path+'/%s'%item + ' this is the file to open')
     
-        # do band(min) subtraction to any _M.tiff images
+        # do bandwise subtraction of min(band) to any _M.tiff images
 
         for b in range(ds.RasterCount+1)[1::]:
             
