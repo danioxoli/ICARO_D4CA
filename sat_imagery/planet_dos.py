@@ -9,7 +9,7 @@ Created on Wed Aug 23 17:00:26 2017
 #
 """
 ###############################################################################
-# To automatically generate ToA and DOS and merge tile related to a specific area or time period
+# To automatically generate ToA and DOS and merge tiles related to a specific area or time period
 # (e.g. months of a year) you need to organize Planet imagery files in folder tree like this:
 #  
 #                       (Root Folder) 
@@ -186,7 +186,7 @@ for item in os.listdir(path):
 
 ###############################################################################
 '''
- Now you are ready to start classification!
+ Now you are ready to start the classification!
  Running this code may take time depending on your hardware equipment
 '''
 
