@@ -58,7 +58,7 @@ df_month = df.groupby(pd.TimeGrouper(freq='M')).mean()
 df_month_roll = roll.groupby(pd.TimeGrouper(freq='M')).mean()
 
 
-# Sore resluts in a csv, transpose DataFrames can be join with, for example, a station shapefile
+# Store resluts in a csv, transpose DataFrames can be join with, for example, a station shapefile
 
 k = df_month.transpose()
 h = df_month_roll.transpose()
