@@ -64,7 +64,7 @@ k = df_month.transpose()
 h = df_month_roll.transpose()
 
 
-k.to_csv(directory_out+"/icaro_2016_month.csv")
-h.to_csv(directory_out+"/icaro_2016_month_roll.csv")    
+k.to_csv(directory_out+"/output_month.csv")
+h.to_csv(directory_out+"/output_month_roll.csv")    
 
 
