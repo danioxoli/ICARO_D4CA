@@ -38,6 +38,8 @@ function getDay() {
 var indexDay = 1;
 var stationIndex = 37;
 
+//stations for Milan with Wund ids and coordinates
+
 var csv = [];
 var stations = [{"id": "ILOMBARD205", "lat": "45.49529648", "lon": "9.13592434"}, {
     "id": "ILOMBARD204",
