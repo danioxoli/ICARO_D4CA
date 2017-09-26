@@ -11,10 +11,10 @@ import numpy as np
 
 #open the input csv file as DataFrame by indiexing on the time column
 
-directory_in="/Users/daniele/Desktop/ICARO"
-directory_out="/Users/daniele/Desktop/ICARO"
+directory_in="your input path"
+directory_out="your output path"
 
-df = pd.read_csv(directory_in+'/icaro_2016_tot.csv')
+df = pd.read_csv(directory_in+'/input.csv')
  
 df['datetime'] = pd.to_datetime(df.datetime) 
 df.set_index('datetime', inplace=True)
