@@ -4,18 +4,15 @@ Created on Wed Jul 12 15:22:13 2017
 
 @author: utente
 """
-#import os
-#import datetime
-#import csv
 
 from seasonal import fit_seasons, adjust_seasons
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-directory_out="/Users/daniele/Desktop/ICARO"
+directory_in="your_input_folder_path"
 
-df = pd.read_csv(directory_out+'/icaro.csv')
+df = pd.read_csv(directory_in+'/icaro.csv')
 df = df.rename(columns={'Unnamed: 0': 'datetime'}) 
 df.set_index('datetime', inplace=True)
 
@@ -29,16 +26,30 @@ for column in df:
     compl_list.update({str(column) : float(df[str(column)].count())/len(df)})
 
 alpha = 2 # std treshold Temperature anomalies (on residuals)
-beta = 3 # std treshold Traffic anomalies
 
 #-------
 # detrend and deseasonalize of temperature
+
+# slicing in time: e.g. 2012 - 2015
+
+st = '2012-01-01 00:00:00'
+en = '2015-12-31 00:00:00'
+
+df_cut= pd.DataFrame(df[st:en])
+
+# to check the completness of the sliced DataFrame
+
+compl_list_cut = {}
+for column in df_cut:
+    compl_list_cut.update({str(column) : float(df_cut[str(column)].count())/len(df_cut)})
+
+# Seasonal Adjustment of the temeprature series
 
 s = []
 t_s = []
 j = 0
 
-for i in df['tmp_5897']:
+for i in df_cut['temperature_station_x']:
     if str(i) != 'nan':
         s.append(i)
         t_s.append(df.index[j])
@@ -55,8 +66,6 @@ residual = adjusted - trend
 
 #check anomalies position in time        
 
-# b = residual > np.std(residual)*3 #using residuals
-
 b = residual > np.std(residual)*alpha
 
 j = 0
@@ -66,130 +75,6 @@ for i in b:
     if i==True:
         p_t.append((s[j],t_s[j]))
     j=j+1
-
-        
-# visualize results
-#plt.figure()
-#plt.plot(s, label='data')
-#plt.plot(trend, label='trend')
-#plt.plot(residual, label='residual')
-#plt.plot(seasons, label='seasons')
-#plt.legend(loc='upper left')
-
-
-#anomalies in traffic
-
-k = []
-t_b = []
-j = 0
-
-for i in df['accesses']:
-    if str(i) != 'nan':
-        k.append(i)
-        t_b.append(df.index[j])
-    j=j+1
-    
-g = np.array(k)
-
-
-b = g > np.std(g)*beta 
-
-j = 0
-p_a = []
-                     
-for i in b:
-    if i==True:
-        p_a.append((k[j],t_b[j]))
-    j=j+1
-
-
-# check for temp and traffic anomalies in the same day 
-dayst = []
-
-for i in p_t:
-    dayst.append(i[1].split(' ')[0])
-    
-u_dayst = set(dayst)
-
-
-
-daysa = []
-
-for i in p_a:
-    daysa.append(i[1].split(' ')[0])
-    
-u_daysa = set(daysa)
-
-#get the days with anomalies
-
-results = set(u_daysa) & set(u_dayst)
-
-#or using intersection
-
-res = set(u_daysa).intersection(u_dayst)
-
-print ('2012-2016')
-print ('N. of days with T anomalies > ' +str(alpha)+' * '+str(np.std(residual)) + ' = '+ str(len(p_t)))
-print ('N. of of days with Accesses anomalies > ' +str(beta)+' * '+str(np.std(g)) + ' = '+ str(len(p_a)))
-print ('N. of days with T and Accesses anomalies = ' + str(len(res)))
-print ('% agreement = ' + str(len(res)/float(len(p_t))))
-
-'''-------------------------------------------------'''
-
-# slicing in time: 2012 - 2015
-
-st = '2012-01-01 00:00:00'
-en = '2015-12-31 00:00:00'
-
-df_cut= pd.DataFrame(df[st:en])
-
-compl_list_cut = {}
-for column in df_cut:
-    compl_list_cut.update({str(column) : float(df_cut[str(column)].count())/len(df_cut)})
-
-# detrend and deseasonalize of temperature
-
-s = []
-t_s = []
-j = 0
-
-for i in df_cut['tmp_5897']:
-    if str(i) != 'nan':
-        s.append(i)
-        t_s.append(df_cut.index[j])
-    j=j+1
-    
-a = np.array(s)
- 
-seasons, trend = fit_seasons(a)
- 
-adjusted = adjust_seasons(a, seasons=seasons)
- 
-residual = adjusted - trend
-
-#check anomalies position in time        
-
-# b = residual > np.std(residual)*3 #using residuals
-
-b = residual > np.std(residual)*alpha
-
-j = 0
-p_t = []
-                     
-for i in b:
-    if i==True:
-        p_t.append((s[j],t_s[j]))
-    j=j+1
-
-        
-# visualize results
-#plt.figure()
-#plt.plot(s, label='data')
-#plt.plot(trend, label='trend')
-#plt.plot(residual, label='residual')
-#plt.plot(seasons, label='seasons')
-#plt.legend(loc='upper left')
-
 
 #anomalies in traffic
 
@@ -200,13 +85,14 @@ j = 0
 for i in df_cut['accesses']:
     if str(i) != 'nan':
         k.append(i)
-        t_b.append(df_cut.index[j])
+        t_b.append(df.index[j])
     j=j+1
     
 g = np.array(k)
 
+beta = df_cut['accesses'].quantile(q=0.98)
 
-b = g > np.std(g)*beta 
+b = g > beta 
 
 j = 0
 p_a = []
@@ -232,141 +118,19 @@ for i in p_a:
     
 u_daysa = set(daysa)
 
-#get the days with anomalies
-
-results = set(u_daysa) & set(u_dayst)
-
-#or using intersection
+#get the days with anomalies using intersection
 
 res = set(u_daysa).intersection(u_dayst)
 
-print ('2012-2015')
-print ('N. of days with T anomalies > ' +str(alpha)+' * '+str(np.std(residual)) + ' = '+ str(len(p_t)))
-print ('N. of of days with Accesses anomalies > ' +str(beta)+' * '+str(np.std(g)) + ' = '+ str(len(p_a)))
+print ('2012-2016')
+print ('N. of hours with T anomalies > ' +str(alpha)+' * '+str(np.std(residual)) + ' = '+ str(len(p_t)))
+print ('N. of of hours with Accesses anomalies > ' +str(beta) ' = '+ str(len(p_a)))
 print ('N. of days with T and Accesses anomalies = ' + str(len(res)))
 print ('% agreement = ' + str(len(res)/float(len(p_t))))
-
-'''-------------------------------------------------'''
-
-# slicing in time: 2016
-
-st = '2016-01-01 00:00:00'
-en = '2016-12-31 00:00:00'
-
-df_cut2= pd.DataFrame(df[st:en])
-
-compl_list_cut2 = {}
-for column in df_cut2:
-    compl_list_cut2.update({str(column) : float(df_cut2[str(column)].count())/len(df_cut2)})
-
-# detrend and deseasonalize of temperature
-
-s = []
-t_s = []
-j = 0
-
-for i in df_cut2['tmp_5897']:
-    if str(i) != 'nan':
-        s.append(i)
-        t_s.append(df_cut2.index[j])
-    j=j+1
-    
-a = np.array(s)
- 
-seasons, trend = fit_seasons(a)
- 
-adjusted = adjust_seasons(a, seasons=seasons)
- 
-residual = adjusted - trend
-
-
-#check anomalies position in time        
-
-# b = residual > np.std(residual)*3 #using residuals
-
-b = residual > np.std(residual)*alpha
-
-j = 0
-p_t = []
-                     
-for i in b:
-    if i==True:
-        p_t.append((s[j],t_s[j]))
-    j=j+1
-
-        
-# visualize results
-#plt.figure()
-#plt.plot(s, label='data')
-#plt.plot(trend, label='trend')
-#plt.plot(residual, label='residual')
-#plt.plot(seasons, label='seasons')
-#plt.legend(loc='upper left')
-
-
-#anomalies in traffic
-
-k = []
-t_b = []
-j = 0
-
-for i in df_cut2['accesses']:
-    if str(i) != 'nan':
-        k.append(i)
-        t_b.append(df_cut2.index[j])
-    j=j+1
-    
-g = np.array(k)
-
-b = g > np.std(g)*beta 
-
-j = 0
-p_a = []
-                     
-for i in b:
-    if i==True:
-        p_a.append((k[j],t_b[j]))
-    j=j+1
-
-
-# check for temp and traffic anomalies in the same day 
-dayst = []
-
-for i in p_t:
-    dayst.append(i[1].split(' ')[0])
-    
-u_dayst = set(dayst)
-
-
-
-daysa = []
-
-for i in p_a:
-    daysa.append(i[1].split(' ')[0])
-    
-u_daysa = set(daysa)
-
-#get the days with anomalies
-
-results = set(u_daysa) & set(u_dayst)
-
-#or using intersection
-
-res = set(u_daysa).intersection(u_dayst)
-
-print ('2016')
-print ('N. of days with T anomalies > ' +str(alpha)+' * '+str(np.std(residual)) + ' = '+ str(len(p_t)))
-print ('N. of of days with Accesses anomalies > ' +str(beta)+' * '+str(np.std(g)) + ' = '+ str(len(p_a)))
-print ('N. of days with T and Accesses anomalies = ' + str(len(res)))
-print ('% agreement = ' + str(len(res)/float(len(p_t))))
-
-
-
-
-
 
 
 #crete new_p_a and new_p_t according to res dates
+
 new_p_a = []
 for d in results:
     for a in p_a:
@@ -447,10 +211,5 @@ for item in t_group[::]:
                 indice=t_group.index(item)
                 t_group[indice].append(delta_ore[0])
     
-
-
-
-
-
-
-
+# the list t_group contains datetime and duration of traffic anomalies and delta time of synchronous anomalies in temperature
+# expressed in terms of delta time from the beginning of any traffic anomaly
