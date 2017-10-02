@@ -12,25 +12,16 @@ import numpy as np
 
 directory_in="your_input_folder_path"
 
-df = pd.read_csv(directory_in+'/icaro.csv')
+df = pd.read_csv(directory_in+'/your_file.csv')
 df = df.rename(columns={'Unnamed: 0': 'datetime'}) 
 df.set_index('datetime', inplace=True)
-
-
-#df_norm = (df - df.mean()) /df.std()
-#df_norm.plot()
-#sem = df_time_norm.sem()
-
-compl_list = {}
-for column in df:
-    compl_list.update({str(column) : float(df[str(column)].count())/len(df)})
 
 alpha = 2 # std treshold Temperature anomalies (on residuals)
 
 #-------
 # detrend and deseasonalize of temperature
 
-# slicing in time: e.g. 2012 - 2015
+# slicing on time: e.g. 2012 - 2015
 
 st = '2012-01-01 00:00:00'
 en = '2015-12-31 00:00:00'
