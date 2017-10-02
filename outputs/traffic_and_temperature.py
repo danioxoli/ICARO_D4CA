@@ -13,7 +13,7 @@ import numpy as np
 directory_in="your_input_folder_path"
 
 df = pd.read_csv(directory_in+'/your_file.csv')
-df = df.rename(columns={'Unnamed: 0': 'datetime'}) 
+df = df.rename(columns={'column with timestamps': 'datetime'}) 
 df.set_index('datetime', inplace=True)
 
 alpha = 2 # std treshold Temperature anomalies (on residuals)
@@ -28,13 +28,13 @@ en = '2015-12-31 00:00:00'
 
 df_cut= pd.DataFrame(df[st:en])
 
-# to check the completness of the sliced DataFrame
+# to check the completness of the sliced DataFrame series
 
 compl_list_cut = {}
 for column in df_cut:
     compl_list_cut.update({str(column) : float(df_cut[str(column)].count())/len(df_cut)})
 
-# Seasonal Adjustment of the temeprature series
+# Seasonal Adjustment of the temeprature series - input = list of only numerics
 
 s = []
 t_s = []
@@ -55,7 +55,7 @@ adjusted = adjust_seasons(a, seasons=seasons)
 residual = adjusted - trend
 
 
-#check anomalies position in time        
+#check anomalies position in time 
 
 b = residual > np.std(residual)*alpha
 
@@ -67,7 +67,7 @@ for i in b:
         p_t.append((s[j],t_s[j]))
     j=j+1
 
-#anomalies in traffic
+#anomalies in traffic, input = list of only numerics      
 
 k = []
 t_b = []
@@ -113,14 +113,13 @@ u_daysa = set(daysa)
 
 res = set(u_daysa).intersection(u_dayst)
 
-print ('2012-2016')
+print ('time period = '+str(st)+' - '+str(en))
 print ('N. of hours with T anomalies > ' +str(alpha)+' * '+str(np.std(residual)) + ' = '+ str(len(p_t)))
 print ('N. of of hours with Accesses anomalies > ' +str(beta) ' = '+ str(len(p_a)))
-print ('N. of days with T and Accesses anomalies = ' + str(len(res)))
-print ('% agreement = ' + str(len(res)/float(len(p_t))))
+print ('N. of days with both T and Accesses anomalies = ' + str(len(res)))
 
 
-#crete new_p_a and new_p_t according to res dates
+#crete list of synchronous anomlies
 
 new_p_a = []
 for d in results:
@@ -178,7 +177,7 @@ for item in new_p_a[1::]:
             dat_0 = dat
             dt_0 = dt
 
-#controllo se l'ultima riga di t_group contiene l'ultima ora registrata e nel caso aggiorno
+#check if the last line of t_group contains the last recorded time and update it
 item = new_p_a[-1]
 ultimogiorno = datetime.strptime(item[1], "%Y-%m-%d %H:%M:%S")
 ultimadata = str(ultimogiorno).split(" ")[0]
@@ -187,7 +186,7 @@ if dt==ultimadata and ultimaora != dat_0 + timedelta(hours=1):
     t_subgroup.append(str(ultimaora).split(" ")[0])
     t_group.append(t_subgroup)
 
-#Aggiungo i picchi di temperatura indicandoli come differenza di ore dall'inizio del fenomeno di traffico
+#add the temperature anomalies as delta hours since the beginning of the traffic anomalies
 for item in t_group[::]:
     for a in new_p_t[::]:
         data = datetime.strptime(a[1], "%Y-%m-%d %H:%M:%S")
