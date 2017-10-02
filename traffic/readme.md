@@ -1,1 +1,3 @@
-add something...
+List of files:
+
+* wazeCollector.js : use for collectiong Waze data through the streaming Waze Traffic API and store results in MongoDb  
