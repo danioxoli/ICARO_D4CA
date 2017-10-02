@@ -1,3 +1,3 @@
 List of files:
 
-* planet_dos.py : use for applyting Dark Object Subtraction (DOS) procedure to PlanetScope imagery
+* planet_dos.py : Dark Object Subtraction (DOS) procedure for PlanetScope imagery
