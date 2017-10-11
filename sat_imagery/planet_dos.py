@@ -41,7 +41,7 @@ path = "<root folder path>" #path of Planet imagery root folder as explained abo
 gdal_merge_path="path to gdal_merge.py" # this Python script can be download here: 
                                         # https://svn.osgeo.org/gdal/trunk/gdal/swig/python/scripts/gdal_merge.py 
   
-# if you are working under Window you may chnge the path to the temporary folder from "/tmp" to "%USERPROFILE%\AppData\Local\"
+# if you are working under Windows you may chnge the path to the temporary folder from "/tmp" to "%USERPROFILE%\AppData\Local\"
 # and check for issues due to backslash. We strongly suggest to test this script using as OS the OSGeo Live VM 
 # (https://live.osgeo.org) to work around dependecies issues.
 ###############################################################################
