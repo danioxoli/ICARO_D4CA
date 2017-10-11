@@ -2,14 +2,14 @@
 """
 Created on Mon Sep  4 16:20:09 2017
 
-@author: daniele
+@author: daniele oxoli - Politecnico di Milano
 """
 
 
 import pandas as pd
 import numpy as np
 
-#open the input csv file as DataFrame by indiexing on the time column
+#open the input csv file as DataFrame by indiexing it on the time column
 
 directory_in="your input path"
 directory_out="your output path"
@@ -37,7 +37,7 @@ for i in range (0,len(check)):
         
 roll = df.rolling(window=3,center=True).median()
 
-# clean up stations with poor correlation factors
+# clean up stations having at least correlation factors (pairwise Pearson's coeff.) lower than a fixed value
 
 f = df.corr().min()
 g = roll.corr().min()
