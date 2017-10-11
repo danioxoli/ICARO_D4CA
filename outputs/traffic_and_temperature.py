@@ -119,7 +119,7 @@ print ('N. of of hours with Accesses anomalies > ' +str(beta) ' = '+ str(len(p_a
 print ('N. of days with both T and Accesses anomalies = ' + str(len(res)))
 
 
-#crete list of synchronous anomlies
+#crete list of synchronous anomalies
 
 new_p_a = []
 for d in results:
