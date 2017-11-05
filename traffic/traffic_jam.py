@@ -21,29 +21,27 @@ start_time = time.clock()
 
 #1ST STEP (working)
 #working code to separate multiple json files into unique json files and saves them
- 
+
+directory_in="C:/Users/utente/Desktop/dilek/in10" #where you stored the separated json files
+directory_out="C:/Users/utente/Desktop/dilek/out10" #where you you want to store the processed json file
+
 #separating json of database 
 
-waze10 = pd.read_json("C:/Users/utente/Desktop/dilek/waze_events_2000.json")
+waze10 = pd.read_json("path to MongoDB data export.json")
 s = pd.DataFrame()
 for i in range(0,len(waze10.jams)):
     s = json.dumps(waze10.jams[i])
-    with open("C:/Users/utente/Desktop/dilek/in10/jams%i.json" %i,"wb") as f:
+    with open(directory_in + "/jams%i.json" %i,"wb") as f:
         f.write(s)
         
 print("split done")
         
 #2ND STEP json csv conversion (working)
 
-directory_in="C:/Users/utente/Desktop/dilek/in10" #where you stored the separated json files
-directory_out="C:/Users/utente/Desktop/dilek/out10" #where you you want to store the processed json file
-
-
-# list of not useful columns
+# list of not interesting columns
 col_to_delate = ['Unnamed: 0','blockingAlertUuid','turnType', 'type','segments', 'startNode','endNode']
 
 time_conversion_function = lambda x: time.strftime('%Y-%m-%d %H:%M:%S',  time.gmtime(x/1000.))
-
 
 #checking the files in the folder and converting them into dataframe
 for f in os.listdir(directory_in):
@@ -74,13 +72,15 @@ for f in os.listdir(directory_in):
 
         
 print("clean done")
-            
+
+# Create the single merged json file for next steps
+
 result = []
 for f in glob.glob(directory_out+ '/'+ "*.json"):
     with open(f, "rb") as infile:
         result.append(json.load(infile))
 
-with open("C:/Users/utente/Desktop/dilek/merged_file10.json", "wb") as outfile:
+with open("path to the new merged file.json", "wb") as outfile:
      json.dump(result, outfile)
 
 print('merge done')
@@ -100,7 +100,7 @@ start_time = time.clock()
 
 # read al events as cell of a dataframe (rows = API call, columns = N. of events registered) 
 
-df1 = pd.read_json("C:/Users/utente/Desktop/dilek/merged_file.json") 
+df1 = pd.read_json("path to the new merged file.json.json") 
 
 
 # write the geojson file of all the events reading by row and column the dataframe
@@ -187,7 +187,7 @@ collection = {
 
 final_geoj = json.dumps(collection)
 
-with open("C:/Users/utente/Desktop/dilek/split/final_geoj4_5.geojson","wb") as f:
+with open("path to the final file.geojson","wb") as f:
     f.write(final_geoj)
 
 
