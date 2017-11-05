@@ -22,8 +22,8 @@ start_time = time.clock()
 #1ST STEP (working)
 #working code to separate multiple json files into unique json files and saves them
 
-directory_in="C:/Users/utente/Desktop/dilek/in10" #where you stored the separated json files
-directory_out="C:/Users/utente/Desktop/dilek/out10" #where you you want to store the processed json file
+directory_in="folderpath" #where you stored the separated json files
+directory_out="folderpath" #where you you want to store the processed json file
 
 #separating json of database 
 
@@ -102,7 +102,6 @@ start_time = time.clock()
 
 df1 = pd.read_json("path to the new merged file.json.json") 
 
-
 # write the geojson file of all the events reading by row and column the dataframe
 
 geoj= []
@@ -172,7 +171,6 @@ for i in range(0, len(df1)):
                 
                 geoj.extend(event_gj)
                 
-            
                 # clean up the event coordinate lists
                 l = []
     
