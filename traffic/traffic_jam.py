@@ -145,7 +145,7 @@ for i in range(0, len(df1)):
                     p = []
                     p_ord = []
                 
-                # write the geojason of the event using the dataframe information
+                # write the geojson of the event using the dataframe information
                     
                 event_gj= {'type': 'Feature',
                              'geometry': {
@@ -167,7 +167,7 @@ for i in range(0, len(df1)):
                           }
                         },
             
-                # add the geojason event to the full list of geojson events
+                # add the geojson event to the full list of geojson events
                 
                 geoj.extend(event_gj)
                 
