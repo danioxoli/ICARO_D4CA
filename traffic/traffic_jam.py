@@ -19,13 +19,13 @@ import glob
 
 start_time = time.clock()
 
-#1ST STEP (working)
-#working code to separate multiple json files into unique json files and saves them
+#1ST STEP 
+#split db json export file into sigle json files and saves them
 
 directory_in="folderpath" #where you stored the separated json files
 directory_out="folderpath" #where you you want to store the processed json file
 
-#separating json of database 
+#splitting db json file  
 
 waze10 = pd.read_json("path to MongoDB data export.json")
 s = pd.DataFrame()
@@ -36,10 +36,10 @@ for i in range(0,len(waze10.jams)):
         
 print("split done")
         
-#2ND STEP json csv conversion (working)
+#2ND STEP json files to dataframe 
 
 # list of not interesting columns
-col_to_delate = ['Unnamed: 0','blockingAlertUuid','turnType', 'type','segments', 'startNode','endNode']
+col_to_remove = ['Unnamed: 0','blockingAlertUuid','turnType', 'type','segments', 'startNode','endNode']
 
 time_conversion_function = lambda x: time.strftime('%Y-%m-%d %H:%M:%S',  time.gmtime(x/1000.))
 
@@ -50,10 +50,10 @@ for f in os.listdir(directory_in):
     if statinfo.st_size > 100:    
         df = pd.read_json(directory_in+'/'+f, )       
         
-        # remove not useful columns (maybe we can remove more but like that seems enough)
+        # remove not useful columns 
         
         for column in list(df.columns):
-            if column in col_to_delate:
+            if column in col_to_delete:
                 del df[column]            
         
         # let's remove empty row, in case their exist, for the main attributes i.e. "line","level" and 'pubMillis'
@@ -65,7 +65,7 @@ for f in os.listdir(directory_in):
         
         df_clean['datetime'] = df_clean['pubMillis'].apply(time_conversion_function)    
                 
-        #this is to store the clean dataframe in a json or a csv (with json is faster)
+        #store the clean dataframe in a json or a csv (with json is faster)
         
         df_clean.to_json(directory_out+ '/'+ f.split('.')[0] + '.json', orient= 'records')
         #df_clean.to_cvs(directory_csv+ '/'+ f.split('.')[0] + '.csv', encoding = 'utf-8')
@@ -73,10 +73,10 @@ for f in os.listdir(directory_in):
         
 print("clean done")
 
-# Create the single merged json file for next steps
+# Create the single cleaned json file for next steps
 
 result = []
-for f in glob.glob(directory_out+ '/'+ "*.json"):
+for f in glob.glob(directory_out+ '/'+ "*.json"): # change *.json to *.csv if you are working with csv files
     with open(f, "rb") as infile:
         result.append(json.load(infile))
 
@@ -91,14 +91,13 @@ print ("processing time manipulation: "+ str(end_time - start_time))
 
 '''-------------------------------------------------------------------------------------
 
-now we have a clean set of json, containg the events at any call of the API, next step is to open one 
-json per time, and put any event in geojson feature collection ->  let's go!
-
+now we have a clean set of jsons, containg the events at any call of the API, next step is to open one 
+json per time, and put each event in a geojson feature collection 
 '''
 
 start_time = time.clock()
 
-# read al events as cell of a dataframe (rows = API call, columns = N. of events registered) 
+# read all events as cell of a dataframe (rows = API call, columns = N. of events registered) 
 
 df1 = pd.read_json("path to the new merged file.json.json") 
 
@@ -124,11 +123,11 @@ for i in range(0, len(df1)):
             
             if event['uuid'] not in u:
                 
-                # create a list of unique id (uuid) to skip writing duplicates event in the final geojson            
+                # create a list of unique id (uuid) to skip writing duplicate events in the final geojson            
                 
                 u.append(event['uuid'])
                 
-                # get a list of list of point coordinate belonging to the line feature
+                # get a list of list of point coordinates belonging to the line feature
             
                 for item in event['line']:
                     #print item
