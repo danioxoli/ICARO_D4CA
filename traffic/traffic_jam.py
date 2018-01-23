@@ -20,12 +20,11 @@ import glob
 start_time = time.clock()
 
 #1ST STEP 
-#split db json export file into sigle json files and saves them
+#split db json export file 
 
 directory_in="folderpath" #where you stored the separated json files
 directory_out="folderpath" #where you you want to store the processed json file
 
-#splitting db json file  
 
 waze10 = pd.read_json("path to MongoDB data export.json")
 s = pd.DataFrame()
@@ -36,14 +35,15 @@ for i in range(0,len(waze10.jams)):
         
 print("split done")
         
-#2ND STEP json files to dataframe 
+#2ND STEP 
+#json files to dataframe 
 
 # list of not interesting columns
 col_to_remove = ['Unnamed: 0','blockingAlertUuid','turnType', 'type','segments', 'startNode','endNode']
 
 time_conversion_function = lambda x: time.strftime('%Y-%m-%d %H:%M:%S',  time.gmtime(x/1000.))
 
-#checking the files in the folder and converting them into dataframe
+#checking the files in the folder and put them into a dataframe
 for f in os.listdir(directory_in):
     # print (f)
     statinfo = os.stat(directory_in+'/'+f) #checking size of the file to exclude empty files from the code
@@ -65,7 +65,7 @@ for f in os.listdir(directory_in):
         
         df_clean['datetime'] = df_clean['pubMillis'].apply(time_conversion_function)    
                 
-        #store the clean dataframe in a json or a csv (with json is faster)
+        #store the clean dataframe in a new json or a csv (with json is faster)
         
         df_clean.to_json(directory_out+ '/'+ f.split('.')[0] + '.json', orient= 'records')
         #df_clean.to_cvs(directory_csv+ '/'+ f.split('.')[0] + '.csv', encoding = 'utf-8')
@@ -91,8 +91,8 @@ print ("processing time manipulation: "+ str(end_time - start_time))
 
 '''-------------------------------------------------------------------------------------
 
-now we have a clean set of jsons, containg the events at any call of the API, next step is to open one 
-json per time, and put each event in a geojson feature collection 
+now we have a clean set of json files, containg the events at any call of the API, next step is to open one 
+file per time, and put each event in a geojson feature collection 
 '''
 
 start_time = time.clock()
